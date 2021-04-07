@@ -1,0 +1,1 @@
+//new MTAFunction(1, "getSoundEffects", "Returns the states of all effects of a sound.", "table", ["element sound"],{}).toCompletionItem(), 
