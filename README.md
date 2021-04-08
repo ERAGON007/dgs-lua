@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="vscode-mta-sa-lua-logo" src="https://github.com/ERAGON007/dgs-lua/raw/master/images/logo.png">
+    <img alt="vscode-mta-sa-lua-logo" src="https://github.com/ERAGON007/dgs-lua/blob/main/images/logo.png">
 </p>
 
 <p align="center">
