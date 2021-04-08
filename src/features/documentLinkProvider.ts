@@ -39,7 +39,7 @@ export class documentLinkProvider implements vscode.DocumentLinkProvider {
     }
 
     provideDocumentLinks(document: vscode.TextDocument, token: vscode.CancellationToken): vscode.ProviderResult<vscode.DocumentLink[]> {
-        if (!vscode.workspace.getConfiguration("mtalua-sense").get("show_reference_links", false))
+        if (!vscode.workspace.getConfiguration("luamta-sense").get("show_reference_links", false))
             return new vscode.DocumentLink[0];
 
         let result: vscode.DocumentLink[] = new Array<vscode.DocumentLink>();

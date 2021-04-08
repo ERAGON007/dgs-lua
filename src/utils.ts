@@ -21,22 +21,22 @@ export function walkSync(currentDirPath: string, callback: { (file: string, stat
 }
 
 export function getScriptSide(fileName: string): ScriptSide {
-    if (path.extname(fileName) != "." + vscode.workspace.getConfiguration("mtalua-generate").get("client_extension", "lua") ||
+    if (path.extname(fileName) != "." + vscode.workspace.getConfiguration("luamta-generate").get("client_extension", "lua") ||
         fileName.startsWith("c_") || fileName.endsWith("_c") ||
         fileName.startsWith("client") || fileName.endsWith("client") ||
-        fileName.startsWith(vscode.workspace.getConfiguration("mtalua-generate").get("client_prefix")) ||
-        fileName.endsWith(vscode.workspace.getConfiguration("mtalua-generate").get("client_prefix")))
+        fileName.startsWith(vscode.workspace.getConfiguration("luamta-generate").get("client_prefix")) ||
+        fileName.endsWith(vscode.workspace.getConfiguration("luamta-generate").get("client_prefix")))
         return ScriptSide.Client;
     /*if (fileName.startsWith("g_") || fileName.endsWith("_g") ||
         fileName.startsWith("global") || fileName.endsWith("global") ||
-        fileName.startsWith(vscode.workspace.getConfiguration("mtalua-generate").get("shared_prefix")) ||
-        fileName.endsWith(vscode.workspace.getConfiguration("mtalua-generate").get("shared_prefix")))
+        fileName.startsWith(vscode.workspace.getConfiguration("luamta-generate").get("shared_prefix")) ||
+        fileName.endsWith(vscode.workspace.getConfiguration("luamta-generate").get("shared_prefix")))
         return ScriptSide.Shared;*/
-    if (path.extname(fileName) != "." + vscode.workspace.getConfiguration("mtalua-generate").get("server_extension", "lua") ||
+    if (path.extname(fileName) != "." + vscode.workspace.getConfiguration("luamta-generate").get("server_extension", "lua") ||
         fileName.startsWith("s_") || fileName.endsWith("_s") ||
         fileName.startsWith("server") || fileName.endsWith("server") ||
-        fileName.startsWith(vscode.workspace.getConfiguration("mtalua-generate").get("server_prefix")) ||
-        fileName.endsWith(vscode.workspace.getConfiguration("mtalua-generate").get("server_prefix")))
+        fileName.startsWith(vscode.workspace.getConfiguration("luamta-generate").get("server_prefix")) ||
+        fileName.endsWith(vscode.workspace.getConfiguration("luamta-generate").get("server_prefix")))
         return ScriptSide.Server;
 
     return ScriptSide.Shared;

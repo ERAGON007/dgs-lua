@@ -51,13 +51,13 @@ export class LuaFunction {
 
     toMarkdown(): vscode.MarkdownString {
         let result = new vscode.MarkdownString();
-        result.appendCodeblock(this.label + " ( " + this.args.join(", ") + " )", "mtaluatypes");
+        result.appendCodeblock(this.label + " ( " + this.args.join(", ") + " )", "luamtatypes");
         result.appendMarkdown(this.description + "\n\n");
-        //result.appendMarkdown("- Returns: " + this.returnType + "\n");
+        result.appendMarkdown("- Returns: " + this.returnType + "\n");
         if(this.returnType != "")
         {
             result.appendMarkdown("- Returns:");
-            result.appendCodeblock(this.returnType, "mtaluatypes");
+            result.appendCodeblock(this.returnType, "luamtatypes");
         }
             
         for (const key in this.argDescs) {
@@ -109,7 +109,7 @@ export class LuaClass {
 
     toMarkdown(): vscode.MarkdownString {
         let result = new vscode.MarkdownString();
-        result.appendCodeblock(this.label, "mtaluatypes");
+        result.appendCodeblock(this.label, "luamtatypes");
         result.appendMarkdown(this.description + "\n\n");
         return result;
     }
@@ -126,7 +126,7 @@ export class LuaField {
 
     toMarkdown(): vscode.MarkdownString {
         let result = new vscode.MarkdownString();
-        result.appendCodeblock(this.label, "mtaluatypes");
+        result.appendCodeblock(this.label, "luamtatypes");
         result.appendMarkdown(this.description + "\n\n");
         return result;
     }

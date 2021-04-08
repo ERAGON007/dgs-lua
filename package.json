@@ -2,7 +2,7 @@
     "name": "mtasa-dgs-lua",
     "displayName": "Dgs - MTA:Lua",
     "description": "Dgs - MTA:Lua Syntax Highlighting + Companion",
-    "version": "2.4.0",
+    "version": "2.7.3",
     "publisher": "ERAGON",
     "license": "GPL v3.0",
     "icon": "images/logo.png",
@@ -55,12 +55,42 @@
         "Snippets"
     ],
     "contributes": {
+        "commands": [
+            {
+                "command": "extension.mta-start-resource",
+                "title": "Start Resource"
+            },
+            {
+                "command": "extension.mta-stop-resource",
+                "title": "Stop Resource"
+            },
+            {
+                "command": "extension.mta-restart-resource",
+                "title": "Restart Resource"
+            },
+            {
+                "command": "extension.mta-new-resource",
+                "title": "New MTA Resource"
+            },
+            {
+                "command": "extension.mta-new-meta",
+                "title": "New MTA Meta.xml file"
+            },
+            {
+                "command": "extension.mta-new-client",
+                "title": "New MTA Client file"
+            },
+            {
+                "command": "extension.mta-new-server",
+                "title": "New MTA Server file"
+            }
+        ],
         "languages": [
             {
-                "id": "mtalua",
+                "id": "luamta",
                 "aliases": [
-                    "MTA Lua",
-                    "mtalua"
+                    "Lua - MTA",
+                    "luamta"
                 ],
                 "extensions": [
                     ".lua"
@@ -68,7 +98,7 @@
                 "configuration": "./language-configuration.json"
             },
             {
-                "id": "mtaluatypes",
+                "id": "luamtatypes",
                 "aliases": [],
                 "extensions": [
                     ".luarioeughiuer"
@@ -78,19 +108,19 @@
         ],
         "grammars": [
             {
-                "language": "mtalua",
+                "language": "luamta",
                 "scopeName": "source.lua",
-                "path": "./syntaxes/mtalua.tmLanguage.json"
+                "path": "./syntaxes/luamta.tmLanguage.json"
             },
             {
-                "language": "mtaluatypes",
+                "language": "luamtatypes",
                 "scopeName": "source.luatypes",
-                "path": "./syntaxes/mtaluatypes.tmLanguage.json"
+                "path": "./syntaxes/luamtatypes.tmLanguage.json"
             }
         ],
         "themes": [
             {
-                "label": "Monokai MTA Lua",
+                "label": "Monokai Lua MTA",
                 "uiTheme": "vs-dark",
                 "path": "./themes/Monokai-MTA-Edit.tmTheme"
             },
@@ -102,7 +132,7 @@
         ],
         "snippets": [],
         "configuration": {
-            "title": "DGS - MTA:Lua",
+            "title": "MTA:SA Lua",
             "properties": {
                 "mtalua-http.enabled": {
                     "description": "Enable the WebAdmin Http Functionality",

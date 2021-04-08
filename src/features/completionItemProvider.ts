@@ -34,6 +34,10 @@ export class functionProvider {
             if (idef.deprecated)
                 def.detail += " (DEPRECATED)";
             def.documentation = idef.toMarkdown();
+            def.documentation.appendMarkdown(idef.returnType);
+            //for (const argName in idef.argDescs){
+            //    def.documentation.appendMarkdown(idef.argDescs[argName]);
+            //}
             this.globalTypes.push(def);
         }
 
@@ -45,6 +49,10 @@ export class functionProvider {
             if (idef.deprecated)
                 def.detail += " (DEPRECATED)";
             def.documentation = idef.toMarkdown();
+            def.documentation.appendMarkdown(idef.returnType);
+            //for (const argName in idef.argDescs){
+            //    def.documentation.appendMarkdown(idef.argDescs[argName]);
+            //}
             this.serverGlobalTypes.push(def);
         }
 
@@ -56,6 +64,10 @@ export class functionProvider {
             if (idef.deprecated)
                 def.detail += " (DEPRECATED)";
             def.documentation = idef.toMarkdown();
+            def.documentation.appendMarkdown(idef.returnType);
+            //for (const argName in idef.argDescs){
+            //    def.documentation.appendMarkdown(idef.argDescs[argName]);
+            //}
             this.clientGlobalTypes.push(def);
         }
 
@@ -94,6 +106,7 @@ export class functionProvider {
             let def = new vscode.CompletionItem(itype.label, vscode.CompletionItemKind.Class);
             def.documentation = new vscode.MarkdownString();
             def.documentation.appendMarkdown(itype.description);
+            //def.documentation.appendMarkdown(itype.returnType);
             this.globalTypes.push(def);
 
             this.functions[itype.label] = new Array<vscode.CompletionItem>();
@@ -133,7 +146,7 @@ export class functionProvider {
         return new Promise<vscode.CompletionItem[]>((resolve, reject) => {
             if (context.triggerKind != vscode.CompletionTriggerKind.TriggerCharacter) {
                 let funcs = this.globalTypes;
-                if (vscode.workspace.getConfiguration("mtalua-sense").get("show_relevant_only", false)) {
+                if (vscode.workspace.getConfiguration("luamta-sense").get("show_relevant_only", false)) {
                     let activeFilePath: string = vscode.window.activeTextEditor.document.fileName;
                     let activeFileName: string = path.basename(activeFilePath);
 

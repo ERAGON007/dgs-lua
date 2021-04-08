@@ -13,12 +13,12 @@ export enum CallType {
 }
 
 export function restartResourceSave(doc: vscode.TextDocument) {
-    if (doc.languageId == "mtalua")
+    if (doc.languageId == "luamta")
         restartResource(doc.uri);
 }
 
 export function startResource(uri: vscode.Uri) {
-    if (!vscode.workspace.getConfiguration("mtalua-http").get("enabled", true))
+    if (!vscode.workspace.getConfiguration("luamta-http").get("enabled", true))
         return;
     if (uri == null) {
         const options: vscode.InputBoxOptions = {
@@ -26,7 +26,7 @@ export function startResource(uri: vscode.Uri) {
             prompt: `Type the name of the resource to start, or press ESC to cancel`,
             placeHolder: 'MyAwesomeResource'
         };
-        if (vscode.workspace.getConfiguration("mtalua-http").get("enable_search_hinting", false))
+        if (vscode.workspace.getConfiguration("luamta-http").get("enable_search_hinting", false))
             options.validateInput = resourcesNameHinting;
         let resName = vscode.window.showInputBox(options);
         resName.then((resourceName) => {
@@ -67,7 +67,7 @@ export function startResource(uri: vscode.Uri) {
 }
 
 export function stopResource(uri: vscode.Uri) {
-    if (!vscode.workspace.getConfiguration("mtalua-http").get("enabled", true))
+    if (!vscode.workspace.getConfiguration("luamta-http").get("enabled", true))
         return;
     if (uri == null) {
         const options: vscode.InputBoxOptions = {
@@ -75,7 +75,7 @@ export function stopResource(uri: vscode.Uri) {
             prompt: `Type the name of the resource to stop, or press ESC to cancel`,
             placeHolder: 'MyAwesomeResource'
         };
-        if (vscode.workspace.getConfiguration("mtalua-http").get("enable_search_hinting", false))
+        if (vscode.workspace.getConfiguration("luamta-http").get("enable_search_hinting", false))
             options.validateInput = resourcesNameHinting;
         let resName = vscode.window.showInputBox(options);
         resName.then((resourceName) => {
@@ -116,7 +116,7 @@ export function stopResource(uri: vscode.Uri) {
 }
 
 export function restartResource(uri: vscode.Uri) {
-    if (!vscode.workspace.getConfiguration("mtalua-http").get("enabled", true))
+    if (!vscode.workspace.getConfiguration("luamta-http").get("enabled", true))
         return;
     if (uri == null) {
         const options: vscode.InputBoxOptions = {
@@ -124,7 +124,7 @@ export function restartResource(uri: vscode.Uri) {
             prompt: `Type the name of the resource to restart, or press ESC to cancel`,
             placeHolder: 'MyAwesomeResource'
         };
-        if (vscode.workspace.getConfiguration("mtalua-http").get("enable_search_hinting", false))
+        if (vscode.workspace.getConfiguration("luamta-http").get("enable_search_hinting", false))
             options.validateInput = resourcesNameHinting;
 
         let resName = vscode.window.showInputBox(options);
@@ -267,11 +267,11 @@ function httpRequest(callType: CallType, formData: string, callback: HttpCallbac
 function getHttpOptions(): request.CoreOptions {
     return {
         'auth': {
-            'user': vscode.workspace.getConfiguration("mtalua-http").get("username"),
-            'pass': vscode.workspace.getConfiguration("mtalua-http").get("password"),
+            'user': vscode.workspace.getConfiguration("luamta-http").get("username"),
+            'pass': vscode.workspace.getConfiguration("luamta-http").get("password"),
             'sendImmediately': true
         },
-        'baseUrl': vscode.workspace.getConfiguration("mtalua-http").get("uri"),
+        'baseUrl': vscode.workspace.getConfiguration("luamta-http").get("uri"),
         'form': '["^R^"]'
     };
 }

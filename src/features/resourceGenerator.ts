@@ -175,15 +175,15 @@ export function generateMeta(uri: vscode.Uri) {
         return;
     }
 
-    let fileExts: Array<string> = vscode.workspace.getConfiguration("mtalua-generate").get("filesrc_extensions", [".png", ".jpg", ".mp3", ".wav", ".ttf", ".tif"]);
+    let fileExts: Array<string> = vscode.workspace.getConfiguration("luamta-generate").get("filesrc_extensions", [".png", ".jpg", ".mp3", ".wav", ".ttf", ".tif"]);
 
     // TODO: This is horrible and should be changed :S, something like a file in the extension which holds our template
-    let defaultAuthor = vscode.workspace.getConfiguration("mtalua-generate").get("author", "VSCode MTA:SA Lua");
-    let defaultType = vscode.workspace.getConfiguration("mtalua-generate").get("meta_default_type", "script");
-    let defaultVersion = vscode.workspace.getConfiguration("mtalua-generate").get("meta_default_version", "0.1.0");
+    let defaultAuthor = vscode.workspace.getConfiguration("luamta-generate").get("author", "VSCode MTA:SA Lua");
+    let defaultType = vscode.workspace.getConfiguration("luamta-generate").get("meta_default_type", "script");
+    let defaultVersion = vscode.workspace.getConfiguration("luamta-generate").get("meta_default_version", "0.1.0");
     let content: string = "<meta>\n";
 
-    if (vscode.workspace.getConfiguration("mtalua-generate").get("watermarking", true))
+    if (vscode.workspace.getConfiguration("luamta-generate").get("watermarking", true))
         content += "\t<!-- Auto generated using VSCode MTA:SA Lua by Subtixx -->\n";
 
     content += "\t<info author=\"" + defaultAuthor + "\" type=\"" + defaultType + "\" name=\"" + resourceName + "\" version=\"" + defaultVersion + "\" />\n";
@@ -199,9 +199,9 @@ export function generateMeta(uri: vscode.Uri) {
             return;
         }
 
-        if (path.extname(file) != "." + vscode.workspace.getConfiguration("mtalua-generate").get("client_extension", "lua") &&
-            path.extname(file) != "." + vscode.workspace.getConfiguration("mtalua-generate").get("shared_extension", "lua") &&
-            path.extname(file) != "." + vscode.workspace.getConfiguration("mtalua-generate").get("server_extension", "lua") &&
+        if (path.extname(file) != "." + vscode.workspace.getConfiguration("luamta-generate").get("client_extension", "lua") &&
+            path.extname(file) != "." + vscode.workspace.getConfiguration("luamta-generate").get("shared_extension", "lua") &&
+            path.extname(file) != "." + vscode.workspace.getConfiguration("luamta-generate").get("server_extension", "lua") &&
             path.extname(file) != ".luac" && path.extname(file) != ".clua" && path.extname(file) != ".lua" && path.extname(file) != ".slua" &&
             path.extname(file) != ".glua"
         ) {
@@ -240,13 +240,13 @@ export function generateMeta(uri: vscode.Uri) {
 
 function generateMetaFile(resourceName: string, filePath: string) {
     // TODO: This is horrible and should be changed :S, something like a file in the extension which holds our template
-    let defaultAuthor = vscode.workspace.getConfiguration("mtalua-generate").get("author", "VSCode MTA:SA Lua");
+    let defaultAuthor = vscode.workspace.getConfiguration("luamta-generate").get("author", "VSCode MTA:SA Lua");
     let content: string = "<meta>\n";
     content += "\t<info author=\"" + defaultAuthor + "\" type=\"script\" name=\"" + resourceName + "\" />\n";
 
-    if (vscode.workspace.getConfiguration("mtalua-generate").get("activate_client_file_generation", true))
+    if (vscode.workspace.getConfiguration("luamta-generate").get("activate_client_file_generation", true))
         content += "\t<script src=\"c_" + resourceName + ".lua\" type=\"client\" cache=\"false\" />\n";
-    if (vscode.workspace.getConfiguration("mtalua-generate").get("activate_client_file_generation", true))
+    if (vscode.workspace.getConfiguration("luamta-generate").get("activate_client_file_generation", true))
         content += "\t<script src=\"s_" + resourceName + ".lua\" type=\"server\" />\n";
     content += "</meta>";
 
@@ -255,28 +255,28 @@ function generateMetaFile(resourceName: string, filePath: string) {
 
 // TODO: These three can be combined into one.
 function generateClientFile(resourceName: string, filePath: string) {
-    if (!vscode.workspace.getConfiguration("mtalua-generate").get("activate_client_file_generation", true))
+    if (!vscode.workspace.getConfiguration("luamta-generate").get("activate_client_file_generation", true))
         return;
-    let content = vscode.workspace.getConfiguration("mtalua-generate").get("default_client_content", "");
+    let content = vscode.workspace.getConfiguration("luamta-generate").get("default_client_content", "");
     fs.writeFileSync(filePath, content);
 }
 
 function generateServerFile(resourceName: string, filePath: string) {
-    if (!vscode.workspace.getConfiguration("mtalua-generate").get("activate_client_file_generation", true))
+    if (!vscode.workspace.getConfiguration("luamta-generate").get("activate_client_file_generation", true))
         return;
-    let content = vscode.workspace.getConfiguration("mtalua-generate").get("default_server_content", "");
+    let content = vscode.workspace.getConfiguration("luamta-generate").get("default_server_content", "");
     fs.writeFileSync(filePath, content);
 }
 
 function generateSharedFile(resourceName: string, filePath: string) {
-    if (!vscode.workspace.getConfiguration("mtalua-generate").get("activate_shared_file_generation", true))
+    if (!vscode.workspace.getConfiguration("luamta-generate").get("activate_shared_file_generation", true))
         return;
-    let content = vscode.workspace.getConfiguration("mtalua-generate").get("default_shared_content", "");
+    let content = vscode.workspace.getConfiguration("luamta-generate").get("default_shared_content", "");
     fs.writeFileSync(filePath, content);
 }
 
 function addToMeta(folderPath: string, filePath: string, side: ScriptSide) {
-    if (!vscode.workspace.getConfiguration("mtalua-generate").get("modify_meta", true))
+    if (!vscode.workspace.getConfiguration("luamta-generate").get("modify_meta", true))
         return;
 
     let relFilePath = path.relative(folderPath, filePath).replace(/\\/g, "/");
@@ -311,12 +311,12 @@ function getFileName(name: string, side: ScriptSide) {
             break;
     }
     let fileName: string;
-    if (vscode.workspace.getConfiguration("mtalua-generate").get(sideStr + "_prefix_type"))
-        fileName = vscode.workspace.getConfiguration("mtalua-generate").get(sideStr + "_prefix") + name +
-            "." + vscode.workspace.getConfiguration("mtalua-generate").get(sideStr + "_extension", "lua");
+    if (vscode.workspace.getConfiguration("luamta-generate").get(sideStr + "_prefix_type"))
+        fileName = vscode.workspace.getConfiguration("luamta-generate").get(sideStr + "_prefix") + name +
+            "." + vscode.workspace.getConfiguration("luamta-generate").get(sideStr + "_extension", "lua");
     else
-        fileName = name + vscode.workspace.getConfiguration("mtalua-generate").get(sideStr + "_prefix") +
-            "." + vscode.workspace.getConfiguration("mtalua-generate").get(sideStr + "_extension", "lua");
+        fileName = name + vscode.workspace.getConfiguration("luamta-generate").get(sideStr + "_prefix") +
+            "." + vscode.workspace.getConfiguration("luamta-generate").get(sideStr + "_extension", "lua");
 
     return fileName;
 }
